@@ -13,12 +13,12 @@ jobs:
 
     steps:
       - name: Step 1 - Checkout main branch from GitHub
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Set up JDK 19
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: 19
@@ -47,9 +47,6 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=aseelTest_test \
-          -Dsonar.organization=aseelTest \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dmaven.test.failure.ignore=true \
-          test jacoco:prepare-agent verify jacoco:report
+            mvn -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar jacoco:report \
+                -Dsonar.projectKey=aseelzaid_test \
+                -Dsonar.exclusions=**/ImageUploader.java,**/Main.java
