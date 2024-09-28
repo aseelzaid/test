@@ -9,6 +9,7 @@ import java.util.List;
 public class Checker {
     protected static final List<Event> resultEvents = new ArrayList<>();
     private Checker() {
+        System.out.println("999");
     }
 
     public static List<Event> checkNameOfEvent(String searchName) {
